@@ -1,4 +1,5 @@
 //Fractional Knapsack Problem
+/*
 #include <iostream>
 #include <bits/stdc++.h>
 using namespace std;
@@ -38,7 +39,6 @@ double fractionalKnapsack(int W, struct Item arr[], int N){
 	return finalvalue;
 }
 
-// Driver code
 int main()
 {
 	int W = 50;
@@ -48,6 +48,8 @@ int main()
 	cout << fractionalKnapsack(W, arr, N);
 	return 0;
 }
+
+
 
 //Activity Selection
 
@@ -80,4 +82,57 @@ int main(){
     printMaxActivities(arr, n);
     return 0;
 }
+*/
+
+
+//Job  scheduling
+
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Job{
+	int no;
+	int deadline;
+	int profit;
+};
+
+bool cmp(Job a, Job b){
+	return(a.profit > b.profit);
+}
+
+int jobSchedule(Job arr[], int n){
+	sort(arr, arr+n, cmp);
+	int slot[n];
+
+	for(int i=0;i<n;i++){
+		slot[i]=0;
+	}
+
+	int p=0;
+	for(int i=0;i<n;i++){
+		for(int j=arr[i].deadline;j>=0;j--){
+			if(slot[j]==0){
+				continue;
+				slot[j]=arr[i].no;
+				p=p+arr[i].profit;
+			}
+		}
+	}
+
+	return p;
+}
+
+int main(){
+    Job arr[] = { { 1, 2, 100 },
+                  { 2, 1, 19 },
+                  { 3, 2, 27 },
+                  { 4, 1, 25 },
+                  { 5, 3, 15 } };
+   
+    int n = sizeof(arr) / sizeof(arr[0]);
+    cout<<jobSchedule(arr, n);
+    return 0;
+}
+
 
