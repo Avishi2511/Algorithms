@@ -80,3 +80,39 @@ int main(){
 	cout<<knapSack(W, weight, profit, n);
 }
 */
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int mcm(int arr[], int n){
+
+    int m[n][n];
+    int q;
+    
+    for(int i=0;i<n;i++){
+        m[i][i] = 0;
+    }
+
+    for(int l=2;l<n;l++){
+        for(int i=1;i<=n-l+1;i++){
+            int j=i+l-1;
+            m[i][j]=0;
+            for(int k=i;k<=j-1;k++)
+                q = m[i][k] + m[k+1][j] + arr[i-1]*arr[k]*arr[j];
+                if(q<m[i][j]){
+                    m[i][j] = q;
+                }
+            }
+        }
+    }
+
+    return m[1][n-1];
+
+}
+
+int main(){
+    int arr[] = {1,2,3,4,5};
+    int n = sizeof(arr)/sizeof(arr[0]);
+
+    cout<<mcm(arr, n);
+}
