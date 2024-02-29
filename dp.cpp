@@ -81,6 +81,8 @@ int main(){
 }
 */
 
+/*
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -116,3 +118,48 @@ int main(){
 
     cout<<mcm(arr, n);
 }
+
+*/
+
+//Coin change problem
+/*
+#include<bits/stdc++.h>
+using namespace std;
+
+int coinChange(int coins[], int n, int sum){
+	int rows=n+1;
+	int cols=sum+1;
+	int arr[rows][cols];
+
+	for(int i=0;i<rows;i++){
+		for(int j=0;j<cols;j++){
+			arr[i][j] = 0;
+		}
+	}
+	arr[0][0] = 1;
+
+	for(int i=0;i<rows;i++){
+		for(int j=0;j<cols;j++){
+			if(coins[i]>j){
+				arr[i][j] = arr[i-1][j];
+			}
+			else{
+				arr[i][j] = arr[i-1][j]+arr[i][j-coins[i]];
+			}
+		}
+	}
+
+	return arr[rows][cols];
+}
+
+int main(){
+	int coins[] = {1,2,3};
+	int n=3;
+	int sum=5;
+	cout<<coinChange(coins, n, sum);
+	return 0;
+}
+*/
+
+
+
